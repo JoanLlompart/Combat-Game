@@ -1,10 +1,23 @@
 public class Screen {
-    static char[][] pixels = new char[20][110];
+    // Reset
+    public static final String RESET = "\033[0m"; // Text Reset
+
+    // Regular Colors
+    public static final String BLACK = "\033[0;30m"; // BLACK
+    public static final String RED = "\033[0;31m"; // RED
+    public static final String GREEN = "\033[0;32m"; // GREEN
+    public static final String YELLOW = "\033[0;33m"; // YELLOW
+    public static final String BLUE = "\033[0;34m"; // BLUE
+    public static final String PURPLE = "\033[0;35m"; // PURPLE
+    public static final String CYAN = "\033[0;36m"; // CYAN
+    public static final String WHITE = "\033[0;37m"; // WHITE
+
+        static String[][] pixels = new String[20][110];
 
     static void clear() {
         for (int i = 0; i < pixels.length; i++) {
             for (int j = 0; j < pixels[i].length; j++) {
-                pixels[i][j] = ' ';
+                pixels[i][j] = " ";
             }
         }
     }
@@ -16,14 +29,15 @@ public class Screen {
         System.out.println();
     }
 
-    public static void printChar(int x, int y, char c) {
+    public static void printChar(int x, int y, char c, String color) {
 
-        pixels[y][x] = c;
+        pixels[y][x] = color + c + RESET;
     }
 
-    public static void print(int x,int y,String s) {
+    public static void print(int x, int y, String c, String s) { //Static deim a java que no es un objecte.
         for (int i = 0; i < s.length(); i++) {
-            pixels[y][x] = s.charAt(i);
+            printChar(x,y,s.charAt(i),BLACK);
+            pixels[y][x] = " " + s.charAt(i);
             x++;
 
         }

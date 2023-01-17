@@ -49,6 +49,24 @@ public class Main {
         }
     }
 
+    static void dibuixaQuadrat(int x,int y,int w,int h) {
+
+
+        for (int i = 0; i < w; i++) {
+            Screen.printChar(i+x,y,'═',Screen.PURPLE);
+            Screen.printChar(i+x,y+h, '═',Screen.PURPLE);
+        }
+        for (int i = 0; i < h; i++) {
+            Screen.printChar(0+x,i + y,'║',Screen.PURPLE);
+            Screen.printChar(w+x,i + y,'║',Screen.PURPLE);
+        }
+        Screen.printChar(x,y,'╔',Screen.PURPLE);
+        Screen.printChar(x+w,y,'╗',Screen.PURPLE);
+        Screen.printChar(x,y+h,'╚',Screen.PURPLE);
+        Screen.printChar(x+w,y+h,'╝',Screen.PURPLE);
+
+    }
+
     static void mostraInfo(Jugador jugador1,Jugador jugador2) {
 
         mostraInfoJugador(0,0,jugador1);
@@ -56,22 +74,38 @@ public class Main {
     }
 
     private static void mostraInfoJugador(int x, int y, Jugador jugador) {
+            dibuixaQuadrat(x,y,25,9);
         for (int i = 0; i < 40; i++) {
-            Screen.printChar(i, 2, '-');
-            Screen.printChar(i, 11, '-');
+            Screen.printChar(i, 2, '-',Screen.GREEN);
+            Screen.printChar(i, 11, '-',Screen.GREEN);
 
         }
-        for (int i = 0; i <= 6; i++) {
-            Screen.printChar(0, i + 2, '|');
-            Screen.printChar(40, i + 2, '|');
+        for (int i = 0; i <= 9; i++) {
+            Screen.printChar(0, i + 2, '|',Screen.GREEN);
+            Screen.printChar(40, i + 2, '|',Screen.GREEN);
         }
-        Screen.print(2+x, 3+y, "Nom: %d " + jugador.nom);
-        Screen.print(2+x, 4+y,"Tipus: %d" + jugador.tipus);
-        Screen.print(2+x, 4+y,"Nivell: %d" + jugador.nivell);
-        Screen.print(2+x, 4+y,"Punts: %d" + jugador.punts);
-        Screen.print(2+x, 4+y,"Punts de Vida: %d" + jugador.puntsDeVide);
-        Screen.print(2+x, 4+y,"CapAtac: %d" + jugador.capAtac);
-        Screen.print(2+x, 4+y,"CapDefensa: %d" + jugador.capDefensa);
+
+        //
+        // dibuixaQuadrat(x,y,25,9);
+
+        Screen.print(2+x, 3+y, String.format("Nom: %s (%s)", jugador.nom,jugador.tipus),Screen.CYAN);
+        Screen.print(2+x, 4+y,String.format("Tipus: %s" + jugador.tipus,'◬'),Screen.CYAN);
+        Screen.print(2+x, 4+y, "Nivell: %s" + jugador.nivell,Screen.CYAN);
+        Screen.print(2+x, 4+y, "Punts: %s" + jugador.punts,Screen.CYAN);
+        Screen.print(2+x, 4+y,String.format("Vida: %s",dibuixaBarra(jugador.puntsDeVide,'♥')), Screen.GREEN);
+        Screen.print(2+x, 4+y, "CapAtac: %s" + jugador.capAtac,Screen.PURPLE);
+        Screen.print(2+x, 4+y, "CapDefensa: %s" + jugador.capDefensa,Screen.RED);
+
+
+    }
+
+    private static Object dibuixaBarra(int n,char c) {
+
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            s.append(c); //s+=c
+        }
+        return s.toString();
     }
 
     private static void combat(Jugador jugador1, Jugador jugador2) {
@@ -105,7 +139,7 @@ public class Main {
 
     private static void mostrarEstrategiaIPunts(String estraJugador1,String estraJugador2,int exit1,int exit2,Jugador jugador) {
         Screen.clear();
-        System.out.printf(jugador.nom + "EstraJugador: \n"+  estraJugador1 + "exit1"+ exit1+"\n");
+        System.out.printf(jugador.nom + "\n" + "EstraJugador: "+  estraJugador1 + "\n exit "+ exit1+"\n");
         //System.out.printf("jugador2"+ Jugador.jugador2 + estraJugador2 + exit2);
     }
 
